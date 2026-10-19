@@ -186,11 +186,12 @@ function buildPlan(options, claudeHome) {
 }
 
 function run(cmd, env) {
-  const result = spawnSync(cmd[0], cmd.slice(1), {
-    stdio: 'inherit',
-    env,
-    shell: process.platform === 'win32',
-  });
+  // On Windows, npx/npm are .cmd shims and need a shell. Node warns (DEP0190)
+  // when args are passed alongside shell: true, so pass one command string.
+  // Every part comes from the fixed SKILLS table above, never from user input.
+  const result = process.platform === 'win32'
+    ? spawnSync(cmd.join(' '), { stdio: 'inherit', env, shell: true })
+    : spawnSync(cmd[0], cmd.slice(1), { stdio: 'inherit', env });
   return result.status === 0;
 }
 
