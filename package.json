@@ -526,6 +526,7 @@
     "security:advisory-sources": "node scripts/ci/supply-chain-advisory-sources.js",
     "test:plugin-setup-platform": "node docker/plugin-setup/run-platform-tests.js",
     "claw": "node scripts/claw.js",
+    "skills:community": "node scripts/install-community-skills.js",
     "orchestrate:status": "node scripts/orchestration-status.js",
     "orchestrate:worker": "bash scripts/orchestrate-codex-worker.sh",
     "orchestrate:tmux": "node scripts/orchestrate-worktrees.js",
